@@ -1,4 +1,5 @@
 import os
+from decouple import config,Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -8,15 +9,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'co7w&zvzelh8wepp=%vs(72p1pyad%sam8l!3=07etoknr+r&f'
+SECRET_KEY = config('SECRET_KEY') #'co7w&zvzelh8wepp=%vs(72p1pyad%sam8l!3=07etoknr+r&f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = False
+DEBUG =config('DEBUG',cast=bool)
 
-ALLOWED_HOSTS = ['52.90.123.158','127.0.0.1']
+ALLOWED_HOSTS = config('ALLOWED_HOST' ,cast=Csv())
 
-
+MEDIA_URL = '/'
 # Application definition
+
+JWT_AUTH = {
+    # Authorization:Token xxx
+    'JWT_AUTH_HEADER_PREFIX': 'Token',
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
+    'Login',
 ]
 
 MIDDLEWARE = [
@@ -69,13 +77,13 @@ DATABASES = {
 
     'ENGINE': 'django.db.backends.postgresql',
 
-    'NAME': 'dbmiceli',
+    'NAME': config('DB_NAME'),
 
-    'USER': 'miceli',
+    'USER':  config('DB_USER'),
 
-    'PASSWORD': 'zdes7iinyy',
+    'PASSWORD': config('DB_PASSWORD'),
 
-    'HOST': 'dbmiceli.c1qjsdki2abz.us-east-1.rds.amazonaws.com',
+    'HOST': config('DB_HOST'),
 
     'PORT': '5432',
 
