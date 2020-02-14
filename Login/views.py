@@ -1,7 +1,8 @@
 #from django.shortcuts import render
 
 # Create your views here.
-
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from django.shortcuts import get_object_or_404
