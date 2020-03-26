@@ -130,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'assets'
 
 SITE_ID = 1
 
@@ -139,6 +140,17 @@ REST_FRAMEWORK = {
 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
 'PAGE_SIZE': 100
+}
+
+SWAGGER_SETTINGS = {
+	'SECURITY_DEFINITIONS':{
+		'ApiKeyAuth': {
+			'description': '',
+			'type': 'apiKey',
+			'name': 'Authorization',
+			'in': 'header'
+		}
+	}
 }
 
 CORS_ALLOW_METHODS = (
